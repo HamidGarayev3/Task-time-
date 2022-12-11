@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body>
+
+    <script>
+
+        
+function GetPrayerTime(country,city){
+    fetch('https://api.aladhan.com/v1/calendarByCity?city=Baku&country=Azerbaijan&month=12&year=2022')
+    .then(res=>res.json())
+    .then(data=>{
+      let  prayerTimes=data;
+      console.log(prayerTimes)
+      let  FindCityCountry=prayerTimes.find(q=>q.country==country && q.city==city)
+      console.log(FindCityCountry.timmings.moment().format('HH:mm'))
+    })
+}
+
+function getMonthlyTimes(country,city,year,month){
+    fetch('https://api.aladhan.com/v1/calendarByCity?city=Baku&country=Azerbaijan&month=12&year=2022')
+    .then(res=>res.json())
+    .then(data=>{
+      let  prayerTimes=data;
+      console.log(prayerTimes)
+      let  FindCityCountry=prayerTimes.filter(q=>q.country==country && q.city==city && q.date.year==year && q.date.month==month)
+      console.log(FindCityCountry.timmings)
+    })
+}
+
+    </script>
+    
+</body>
+</html>
